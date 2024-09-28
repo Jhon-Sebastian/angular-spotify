@@ -3,6 +3,23 @@
 {
   "compileOnSave": false,
   "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@/*": ["src/*"],
+      "@aside-menu/*": [
+        "src/app/components/aside-menu/components/*",
+        "src/app/components/aside-menu/service/*",
+        "src/app/components/aside-menu/shared/*"
+      ],
+      "@main-contain/*": [
+        "src/app/components/main-contain/components/*",
+        "src/app/components/main-contain/services/*",
+        "src/app/components/main-contain/shared/*"
+      ],
+      "@icons/*": ["public/icons/*"],
+      "@lib/*": ["public/lib/*"],
+      "@music/*": ["public/music/*"]
+    },
     "outDir": "./dist/out-tsc",
     "strict": true,
     "noImplicitOverride": true,
@@ -18,10 +35,7 @@
     "importHelpers": true,
     "target": "ES2022",
     "module": "ES2022",
-    "lib": [
-      "ES2022",
-      "dom"
-    ]
+    "lib": ["ES2022", "dom"]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,

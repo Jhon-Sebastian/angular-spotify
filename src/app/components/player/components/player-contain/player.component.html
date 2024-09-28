@@ -1,0 +1,20 @@
+<div class="flex justify-between items-center h-full">
+  <div>Current song</div>
+
+  <div class="grid place-content-center gap-4 flex-1">
+    <div class="flex justify-center">
+      <button class="bg-white rounded-full p-2" (click)="changeStatePlayer()">
+        @if (isPlaying()) {
+          <PlayIcon />
+        } @else {
+          <PauseIcon />
+        }
+      </button>
+    </div>
+
+  </div>
+
+  <div class="grid place-content-center">Volumen</div>
+
+  <audio #audioRef></audio>
+</div>

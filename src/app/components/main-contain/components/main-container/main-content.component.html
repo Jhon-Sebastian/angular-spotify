@@ -1,0 +1,15 @@
+<div id="playlist-container" class="relative transition-all duration-1000 bg-green-600">
+  <!--PageHeader-->
+
+  <div class="relative z-10 px-6 pt-10">
+    <Greeting />
+
+    <div class="flex flex-wrap mt-4 gap-4">
+      @for (playlist of playLists(); track $index) {
+      <PlayListItemCard [playList]="playlist" />
+      }
+    </div>
+  </div>
+
+  <div class="absolute inset-0 bg-gradient-to-t from-zinc-900 via-zinc-900/80"></div>
+</div>
