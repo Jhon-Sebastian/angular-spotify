@@ -7,41 +7,48 @@ import {
 } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { Playlist } from '@lib/data';
+import { CardPlayButtonComponent } from '../card-play-button/card-play-button.component';
 
 @Component({
   selector: 'PlayListItemCard',
   standalone: true,
-  imports: [RouterLink],
+  imports: [RouterLink, CardPlayButtonComponent],
   changeDetection: ChangeDetectionStrategy.OnPush,
   template: `
     @if (playList()) {
-      <a
-        [routerLink]="'/playlist/' + playList().id"
-        class="playlist-item relative p-2 overflow-hidden gap-2 pb-6 rounded-md hover:bg-zinc-800 shadow-lg hover:shadow-xl bg-zinc-500/30 w-44 flex-col flex transition-all duration-300"
+      <article
+        class="group relative hover:bg-zinc-800 shadow-lg hover:shadow-xl bg-zinc-500/30 transition-all duration-300 rounded-md"
       >
-        <picture class="aspect-square w-full h-auto flex-none">
-          <img
-            [src]="playList().cover"
-            [alt]="'Cover of' + playList().title + ' by '"
-            class="object-cover w-full h-full rounded-md"
-          />
-        </picture>
-        <div class="flex flex-col flex-auto px-2">
-          <h4 class="text-white text-sm">{{ playList().title }}</h4>
-          <span class="text-gray-400 text-xs"> {{ getArtists() }} </span>
+        <div
+          class="absolute right-4 bottom-20 translate-y-4 transition-all duration-500 opacity-0 group-hover:translate-y-0 group-hover:opacity-100 z-10"
+        >
+          <CardPlayButton [id]="playList().id" />
         </div>
-      </a>
+        <a
+          [routerLink]="'/playlist/' + playList().id"
+          class="playlist-item relative p-2 overflow-hidden gap-2 pb-6 w-44 flex-col flex "
+        >
+          <picture class="aspect-square w-full h-auto flex-none">
+            <img
+              [src]="playList().cover"
+              [alt]="'Cover of' + playList().title + ' by '"
+              class="object-cover w-full h-full rounded-md"
+            />
+          </picture>
+          <div class="flex flex-col flex-auto px-2">
+            <h4 class="text-white text-sm">{{ playList().title }}</h4>
+            <span class="text-gray-400 text-xs"> {{ getArtists() }} </span>
+          </div>
+        </a>
+      </article>
     }
   `,
 })
 export class PlayListItemCardComponent {
   private _asideMenuService = inject(AsideMenuService);
-
   playList = input.required<Playlist>();
 
   getArtists() {
-    return this._asideMenuService.joinAllArtists(
-      this.playList().artists,
-    );
+    return this._asideMenuService.joinAllArtists(this.playList().artists);
   }
 }

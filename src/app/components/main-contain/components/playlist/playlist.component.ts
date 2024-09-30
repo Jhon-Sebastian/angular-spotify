@@ -19,7 +19,6 @@ import { Playlist, Song } from '@lib/data';
 })
 export class PlaylistComponent implements OnInit {
   playlist = input.required<Playlist>();
-
   songs = signal<Song[]>([]);
 
   _asideMenuService = inject(AsideMenuService);
